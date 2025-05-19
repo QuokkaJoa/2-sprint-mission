@@ -1,47 +1,39 @@
 package com.sprint.mission.discodeit.exception;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorCode {
+    // User 관련 에러 코드
+    USER_NOT_FOUND("사용자를 찾을 수 없습니다."),
+    DUPLICATE_USER("이미 존재하는 사용자입니다."),
+    INVALID_USER_CREDENTIALS("잘못된 사용자 인증 정보입니다."),
+    
+    // Channel 관련 에러 코드
+    CHANNEL_NOT_FOUND("채널을 찾을 수 없습니다."),
+    PRIVATE_CHANNEL_UPDATE("비공개 채널은 수정할 수 없습니다."),
+    
+    // Message 관련 에러 코드
+    MESSAGE_NOT_FOUND("메시지를 찾을 수 없습니다."),
+    
+    // BinaryContent 관련 에러 코드
+    BINARY_CONTENT_NOT_FOUND("바이너리 컨텐츠를 찾을 수 없습니다."),
+    
+    // ReadStatus 관련 에러 코드
+    READ_STATUS_NOT_FOUND("읽음 상태를 찾을 수 없습니다."),
+    DUPLICATE_READ_STATUS("이미 존재하는 읽음 상태입니다."),
+    
+    // UserStatus 관련 에러 코드
+    USER_STATUS_NOT_FOUND("사용자 상태를 찾을 수 없습니다."),
+    DUPLICATE_USER_STATUS("이미 존재하는 사용자 상태입니다."),
+    
+    // Server 에러 코드
+    INTERNAL_SERVER_ERROR("서버 내부 오류가 발생했습니다."),
+    INVALID_REQUEST("잘못된 요청입니다.");
 
-  //User 에러
-  USER_NOT_FOUND(HttpStatus.NOT_FOUND, "U001", "유저를 찾을 수 없습니다"),
-  USER_EMAIL_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "U002", "입력하신 유저의 이메일은 이미 존재하는 이메일 입니다"),
-  USER_NAME_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "U003", "입력하신 유저의 이름은 이미 존재하는 이메일 입니다"),
+    private final String message;
 
-  //로그인 에러
-  AUTH_WRONG_PASSWORD(HttpStatus.BAD_REQUEST, "A001", "해당 비밀번호에 맞는 유저가 존재하지 않습니다"),
-
-  //Channel 에러
-  CHANNEL_NOT_FOUND(HttpStatus.NOT_FOUND, "C001", "채널을 찾을 수 없습니다"),
-  PRIVATE_CHANNEL_UPDATE(HttpStatus.BAD_REQUEST, "C002", "PRIVATE 채널은 update 할 수 없습니다"),
-
-  //BinaryContents 에러
-  BINARY_CONTENTS_NOT_FOUND(HttpStatus.NOT_FOUND, "B001", "Binary Content를 찾을 수 없습니다"),
-
-  //Message 에러
-  MESSAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "M001", "메시지를 찾을 수 없습니다"),
-
-  //ReadStatus 에러
-  READ_STATUS_NOT_FOUND(HttpStatus.NOT_FOUND, "R002", "ReadStatus가 존재하지 않습니다"),
-  INVALID_READ_STATUS_REQUEST(HttpStatus.BAD_REQUEST, "R001",
-      "해당 userId와 channelId에 부합하는 ReadStatus를 찾을 수 없습니다"),
-
-  //UserStatus 에러
-  USER_STATUS_NOT_FOUND(HttpStatus.NOT_FOUND, "US001", "UserStatus가 존재하지 않습니다"),
-
-  //예외 에러
-  VALIDATION_FAILED(HttpStatus.BAD_REQUEST, "V001", "요청값이 유효하지 않습니다.");
-  
-  private final HttpStatus status;
-  private String code;
-  private final String message;
-
-  ErrorCode(HttpStatus status, String code, String message) {
-    this.status = status;
-    this.code = code;
-    this.message = message;
-  }
-}
+    ErrorCode(String message) {
+        this.message = message;
+    }
+} 
